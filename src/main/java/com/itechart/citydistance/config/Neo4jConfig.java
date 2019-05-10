@@ -11,8 +11,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableNeo4jRepositories("com.itechart.citydistance.repository")
 @EnableTransactionManagement
+@EnableNeo4jRepositories("com.itechart.citydistance.repository")
 public class Neo4jConfig {
 
     @Value("${spring.data.neo4j.uri}")
@@ -35,7 +35,7 @@ public class Neo4jConfig {
 
     @Bean
     public SessionFactory sessionFactory() {
-        return new SessionFactory(getConfiguration(), "com.itechart.citydistance");
+        return new SessionFactory(getConfiguration(), "com.itechart.citydistance.entity");
     }
 
     @Bean

@@ -1,0 +1,63 @@
+openapi: 3.0.0
+
+info:
+  version: unknown
+  title: Itechart.com
+
+servers:
+  - url: /v1
+
+paths:
+
+  # ========================================
+  # ===== Cities API
+  # ========================================
+
+  /cities:
+
+    post:
+      operationId: createCitiesWithRoad
+      tags:
+        - cities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Path'
+      responses:
+        201:
+          description: Created
+          headers:
+            location:
+              description: URI of the new item
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Path'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+components:
+
+  responses:
+
+    UnexpectedError:
+      description: Unexpected Error
+
+  schemas:
+
+    Path:
+      type: object
+      required:
+        - name
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+        distance:
+          type: integer
