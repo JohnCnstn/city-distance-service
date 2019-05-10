@@ -23,6 +23,7 @@ public interface RoadMapper {
 
     default Road toModel(RoadEntity entity) {
         var model = new Road();
+        model.setId(entity.getId());
         model.setDistance(entity.getDistance());
         model.setFrom(CITY_MAPPER.toModel(entity.getFrom()));
         model.setTo(CITY_MAPPER.toModel(entity.getTo()));
