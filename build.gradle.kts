@@ -22,6 +22,9 @@ dependencies {
 
     compileOnly("org.projectlombok:lombok")
 
+    implementation("org.neo4j:neo4j-ogm-embedded-driver:${Versions.neo4jOgmEmbeddedDriver}")
+    implementation("org.springframework.data:swagger-spring-data-neo4j:${Versions.springDataNeo4j}")
+
     implementation("io.swagger:swagger-annotations:${Versions.swaggerAnnotations}")
     implementation("org.apache.commons:commons-lang3")
     implementation("org.mapstruct:mapstruct-jdk8:${Versions.mapstruct}")
@@ -30,6 +33,7 @@ dependencies {
     implementation("org.yaml:snakeyaml")
 
     testImplementation("com.github.javafaker:javafaker:${Versions.javafaker}")
+    testImplementation("org.neo4j:neo4j-ogm-test:${Versions.neo4jOgmTest}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:testcontainers:${Versions.testcontainers}")
 }
