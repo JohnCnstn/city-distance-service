@@ -1,10 +1,10 @@
 package com.itechart.citydistance.entity;
 
 import lombok.Data;
-import org.neo4j.ogm.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.Index;
+import org.neo4j.ogm.annotation.NodeEntity;
 
 @Data
 @NodeEntity("City")
@@ -16,8 +16,5 @@ public class CityEntity {
 
     @Index(unique = true)
     private String name;
-
-    @Relationship(type = "ROAD_TO", direction = Relationship.UNDIRECTED)
-    private List<RoadEntity> roads = new ArrayList<>();
 
 }

@@ -13,18 +13,18 @@ paths:
   # ===== Cities API
   # ========================================
 
-  /cities:
+  /roads:
 
     post:
-      operationId: createCitiesWithRoad
+      operationId: createRoad
       tags:
-        - cities
+        - roads
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Path'
+              $ref: '#/components/schemas/Road'
       responses:
         201:
           description: Created
@@ -37,7 +37,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Path'
+                $ref: '#/components/schemas/Road'
         default:
           $ref: '#/components/responses/UnexpectedError'
 
@@ -50,14 +50,31 @@ components:
 
   schemas:
 
-    Path:
+    Road:
+      type: object
+      required:
+        - distance
+      properties:
+        id:
+          type: number
+          format: int64
+          readOnly: true
+        from:
+          $ref: "#/components/schemas/City"
+        to:
+          $ref: "#/components/schemas/City"
+        distance:
+          type: double
+
+    City:
       type: object
       required:
         - name
       properties:
-        from:
+        id:
+          type: number
+          format: int64
+          readOnly: true
+        name:
           type: string
-        to:
-          type: string
-        distance:
-          type: integer
+
