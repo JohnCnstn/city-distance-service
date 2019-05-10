@@ -20,16 +20,18 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
+    compile("org.springframework.boot:spring-boot-starter-data-neo4j:${Versions.springDataNeo4j}")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
     compileOnly("org.projectlombok:lombok")
 
     implementation("org.neo4j:neo4j-ogm-embedded-driver:${Versions.neo4jOgmEmbeddedDriver}")
-    implementation("org.springframework.data:swagger-spring-data-neo4j:${Versions.springDataNeo4j}")
+    implementation("org.neo4j:neo4j-ogm-bolt-driver:${Versions.neo4jOgmBoltDriver}")
 
     implementation("io.swagger:swagger-annotations:${Versions.swaggerAnnotations}")
     implementation("org.apache.commons:commons-lang3")
     implementation("org.mapstruct:mapstruct-jdk8:${Versions.mapstruct}")
 
-    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.yaml:snakeyaml")
 
     testImplementation("com.github.javafaker:javafaker:${Versions.javafaker}")
