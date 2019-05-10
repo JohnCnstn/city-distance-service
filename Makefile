@@ -16,7 +16,7 @@ else
 endif
 
 
-docker-noe4j:
+docker-neo4j:
 	docker rm $(PROJECT_NAME)-neo4j --force || true
 	docker run --detach \
 		--publish 7687:7687 \
@@ -25,4 +25,13 @@ docker-noe4j:
 		neo4j:3.5.5 || true
 
 
-docker-local: docker-noe4j
+docker-swagger-ui:
+	docker rm $(PROJECT_NAME)-swagger-ui --force || true
+	docker run --detach \
+		--publish 3000:8080 \
+		--env API_URL=http://localhost:8080/v1/openapi.json \
+		--name $(PROJECT_NAME)-swagger-ui \
+		swaggerapi/swagger-ui:v3.22.1 || true
+
+
+docker-local: docker-neo4j docker-swagger-ui

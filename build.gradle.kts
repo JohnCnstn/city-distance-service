@@ -8,6 +8,8 @@ plugins {
 
 apply(plugin = "io.spring.dependency-management")
 
+apply(from = "gradle/generate-openapi.gradle.kts")
+
 group = "com.itechart"
 version = "0.0.1-SNAPSHOT"
 
@@ -29,10 +31,11 @@ dependencies {
     implementation("org.neo4j:neo4j-ogm-bolt-driver:${Versions.neo4jOgmBoltDriver}")
 
     implementation("io.swagger:swagger-annotations:${Versions.swaggerAnnotations}")
-    implementation("org.apache.commons:commons-lang3")
     implementation("org.mapstruct:mapstruct-jdk8:${Versions.mapstruct}")
 
     implementation("org.yaml:snakeyaml")
+
+    runtimeOnly("javax.xml.bind:jaxb-api")
 
     testImplementation("com.github.javafaker:javafaker:${Versions.javafaker}")
     testImplementation("org.neo4j:neo4j-ogm-test:${Versions.neo4jOgmTest}")
@@ -43,9 +46,6 @@ dependencies {
 configurations {
     compileOnly {
         extendsFrom(annotationProcessor.get())
-    }
-    implementation {
-        exclude(group = "org.springframework.boot", module = "spring-boot-starter-tomcat")
     }
 }
 

@@ -19,6 +19,7 @@ logging:
     io.undertow: WARN
     org.springframework: WARN
     org.xnio: WARN
+
 ---
 spring:
   profiles: local
