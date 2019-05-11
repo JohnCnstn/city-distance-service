@@ -33,6 +33,8 @@ dependencies {
     implementation("io.swagger:swagger-annotations:${Versions.swaggerAnnotations}")
     implementation("org.mapstruct:mapstruct-jdk8:${Versions.mapstruct}")
 
+    implementation("org.springframework.hateoas:spring-hateoas:${Versions.springHateoas}")
+
     implementation("org.yaml:snakeyaml")
 
     runtimeOnly("javax.xml.bind:jaxb-api")

@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface CityRepository extends Neo4jRepository<CityEntity, Long> {
 
     Optional<CityEntity> findByName(String name);
+
 }
