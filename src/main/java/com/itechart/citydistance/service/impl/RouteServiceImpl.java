@@ -1,5 +1,6 @@
 package com.itechart.citydistance.service.impl;
 
+import com.itechart.citydistance.exception.NoConnectionBetweenCitiesException;
 import com.itechart.citydistance.generated.model.Route;
 import com.itechart.citydistance.repository.RoadRepository;
 import com.itechart.citydistance.service.RouteService;
@@ -21,6 +22,9 @@ public class RouteServiceImpl implements RouteService {
     @Transactional(readOnly = true)
     public Page<Route> getRoutes(String from, String to, Pageable pageable) {
         var roads = roadRepository.findRoads(from, to, pageable);
+        if (roads.getContent().isEmpty()) {
+            throw new NoConnectionBetweenCitiesException(from, to);
+        }
         return roads.map(ROUTE_MAPPER::toModel);
     }
 

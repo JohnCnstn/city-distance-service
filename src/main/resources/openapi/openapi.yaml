@@ -131,6 +131,12 @@ components:
         name:
           type: string
 
+    Error:
+      properties:
+        message:
+          type: string
+          description: Error message
+
   parameters:
 
     PageQueryParam:

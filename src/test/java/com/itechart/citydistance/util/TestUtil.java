@@ -23,4 +23,9 @@ public abstract class TestUtil {
                 .name(FAKE.lorem().word());
     }
 
+    public static City newCity(String name) {
+        return new City()
+                .name(name);
+    }
+
 }
