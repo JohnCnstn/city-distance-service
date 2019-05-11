@@ -18,6 +18,13 @@ public abstract class TestUtil {
                 .distance(FAKE.number().randomDouble(4, 1, 10000));
     }
 
+    public static Road newRoad(City from, City to, double distance) {
+        return new Road()
+                .from(from)
+                .to(to)
+                .distance(distance);
+    }
+
     public static City newCity() {
         return new City()
                 .name(FAKE.lorem().word());
