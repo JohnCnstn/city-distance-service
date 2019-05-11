@@ -35,7 +35,9 @@ public class Neo4jConfig {
 
     @Bean
     public SessionFactory sessionFactory() {
-        return new SessionFactory(getConfiguration(), "com.itechart.citydistance.entity");
+        return new SessionFactory(getConfiguration(),
+                "com.itechart.citydistance.entity",
+                "com.itechart.citydistance.dto");
     }
 
     @Bean

@@ -10,7 +10,40 @@ servers:
 paths:
 
   # ========================================
-  # ===== Cities API
+  # ===== Routes API
+  # ========================================
+
+  /routes:
+
+    get:
+      operationId: getRoutes
+      tags:
+      - routes
+      parameters:
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  # ========================================
+  # ===== Roads API
   # ========================================
 
   /roads:
@@ -49,6 +82,21 @@ components:
       description: Unexpected Error
 
   schemas:
+
+    Route:
+      type: object
+      required:
+      - from
+      - to
+      - distance
+      properties:
+        cities:
+          type: array
+          items:
+            $ref: "#/components/schemas/City"
+        totalDistance:
+          type: number
+          format: double
 
     Road:
       type: object
