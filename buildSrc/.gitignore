@@ -1,7 +1,6 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
-/src/main/java/com/itechart/citydistance/generated
 
 ### STS ###
 .apt_generated

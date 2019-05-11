@@ -1,0 +1,30 @@
+---
+spring:
+  data:
+    neo4j:
+      uri: ${SPRING_DATA_NEO4J_URI}
+      username: ${SPRING_DATA_NEO4J_USERNAME}
+      password: ${SPRING_DATA_NEO4J_PASSWORD}
+
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    root: INFO
+    com.itechart: DEBUG
+
+    com.zaxxer: WARN
+    io.undertow.websockets.jsr: ERROR
+    io.undertow: WARN
+    org.springframework: WARN
+    org.xnio: WARN
+
+---
+spring:
+  profiles: local
+  data:
+    neo4j:
+      uri: bolt://localhost:7687/city-distance-service
+      username: neo4j
+      password: city-distance

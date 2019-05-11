@@ -1,0 +1,157 @@
+openapi: 3.0.0
+
+info:
+  version: unknown
+  title: Itechart.com
+
+servers:
+- url: /api/v1
+
+paths:
+
+  # ========================================
+  # ===== Routes API
+  # ========================================
+
+  /routes:
+
+    get:
+      operationId: getRoutes
+      tags:
+      - routes
+      parameters:
+      - $ref: "#/components/parameters/PageQueryParam"
+      - $ref: "#/components/parameters/SizeQueryParam"
+      - name: from
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: to
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+  # ========================================
+  # ===== Roads API
+  # ========================================
+
+  /roads:
+
+    post:
+      operationId: createRoad
+      tags:
+      - roads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Road'
+      responses:
+        201:
+          description: Created
+          headers:
+            location:
+              description: URI of the new item
+              schema:
+                type: string
+                format: uri
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Road'
+        default:
+          $ref: '#/components/responses/UnexpectedError'
+
+components:
+
+  responses:
+
+    UnexpectedError:
+      description: Unexpected Error
+
+  schemas:
+
+    Route:
+      type: object
+      required:
+      - from
+      - to
+      - distance
+      properties:
+        cities:
+          type: array
+          items:
+            $ref: "#/components/schemas/City"
+        totalDistance:
+          type: number
+          format: double
+
+    Road:
+      type: object
+      required:
+      - from
+      - to
+      - distance
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        from:
+          $ref: "#/components/schemas/City"
+        to:
+          $ref: "#/components/schemas/City"
+        distance:
+          type: number
+          format: double
+
+    City:
+      type: object
+      required:
+      - name
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        name:
+          type: string
+
+    Error:
+      properties:
+        message:
+          type: string
+          description: Error message
+
+  parameters:
+
+    PageQueryParam:
+      in: query
+      name: page
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+
+    SizeQueryParam:
+      in: query
+      name: size
+      schema:
+        type: integer
+        default: 20
+        minimum: 1
+        maximum: 100
