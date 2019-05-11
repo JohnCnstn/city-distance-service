@@ -5,7 +5,7 @@ info:
   title: Itechart.com
 
 servers:
-  - url: /v1
+- url: /api/v1
 
 paths:
 
@@ -18,7 +18,7 @@ paths:
     post:
       operationId: createRoad
       tags:
-        - roads
+      - roads
       requestBody:
         required: true
         content:
@@ -53,9 +53,9 @@ components:
     Road:
       type: object
       required:
-        - from
-        - to
-        - distance
+      - from
+      - to
+      - distance
       properties:
         id:
           type: integer
@@ -72,7 +72,7 @@ components:
     City:
       type: object
       required:
-        - name
+      - name
       properties:
         id:
           type: integer

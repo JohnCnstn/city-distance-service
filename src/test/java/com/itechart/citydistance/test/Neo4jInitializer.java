@@ -51,5 +51,5 @@ public class Neo4jInitializer implements ApplicationContextInitializer<Configura
                 "spring.data.neo4j.password:" + NEO4J_PASSWORD
         ).applyTo(applicationContext);
     }
-    
+
 }

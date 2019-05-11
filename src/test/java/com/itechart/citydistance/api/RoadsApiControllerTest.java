@@ -17,11 +17,13 @@ public class RoadsApiControllerTest extends AbstractIntegrationTest {
     @Test
     public void testCreateRoad_happyPath() throws Exception {
         // GIVEN
-        var request = TestUtil.newRoad();
+        var from = TestUtil.newCity();
+        var to = TestUtil.newCity();
+        var request = TestUtil.newRoad(from, to);
 
         // WHEN
         var response = mockMvc.perform(
-                post(URI.create("/v1/roads"))
+                post(URI.create("/api/v1/roads"))
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(request)))
                 .andExpect(status().isCreated())
@@ -30,8 +32,14 @@ public class RoadsApiControllerTest extends AbstractIntegrationTest {
 
         // THEN
         assertSoftly(softly -> {
-//            softly.assertThat(result.getId()).isNotNull();
+            softly.assertThat(result.getId()).isNotNull();
             softly.assertThat(result.getDistance()).isEqualTo(request.getDistance());
+
+            softly.assertThat(result.getFrom().getId()).isNotNull();
+            softly.assertThat(result.getFrom().getName()).isEqualTo(request.getFrom().getName());
+
+            softly.assertThat(result.getTo().getId()).isNotNull();
+            softly.assertThat(result.getTo().getName()).isEqualTo(request.getTo().getName());
         });
 
     }
