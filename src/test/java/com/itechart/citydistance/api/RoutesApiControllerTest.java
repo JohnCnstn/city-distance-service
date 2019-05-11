@@ -1,7 +1,6 @@
 package com.itechart.citydistance.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.itechart.citydistance.generated.model.City;
 import com.itechart.citydistance.generated.model.Road;
 import com.itechart.citydistance.generated.model.Route;
 import com.itechart.citydistance.test.AbstractIntegrationTest;
@@ -17,7 +16,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class RoutesApiController extends AbstractIntegrationTest {
+public class RoutesApiControllerTest extends AbstractIntegrationTest {
 
     @Test
     public void testGetRoutes_happyPath() throws Exception {
@@ -86,7 +85,7 @@ public class RoutesApiController extends AbstractIntegrationTest {
         mockMvc.perform(
                 get(URI.create("/api/v1/routes?page=1&size=20&from=a&to=b"))
                         .contentType(APPLICATION_JSON))
-        // THEN
+                // THEN
                 .andExpect(status().isUnprocessableEntity());
     }
 

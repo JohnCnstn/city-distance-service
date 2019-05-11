@@ -17,7 +17,7 @@ public interface RoadRepository extends Neo4jRepository<RoadEntity, Long> {
             "              REDUCE(dist = 0, r in route | dist + r.distance) AS totalDistance\n" +
             "           ORDER BY totalDistance ASC\n",
             countQuery = "MATCH path = (from: City {name:{from}}) -[route:ROAD_TO*]- (to: City {name:{to}})\n" +
-            "             RETURN COUNT(path)\n")
+                    "             RETURN COUNT(path)\n")
     Page<RouteDto> findRoads(@Param("from") String from, @Param("to") String to, Pageable pageable);
 
 }
