@@ -64,7 +64,7 @@ public class RoutesApiControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void testGetRoutes_unhappyPath() throws Exception {
+    public void testGetRoutesBetweenNotConnectedCities() throws Exception {
         // GIVEN
         final String firstCityName = "city1";
         final String secondCityName = "city2";
@@ -83,9 +83,11 @@ public class RoutesApiControllerTest extends AbstractIntegrationTest {
 
         // WHEN
         mockMvc.perform(
-                get(URI.create("/api/v1/routes?page=1&size=20&from=a&to=b"))
-                        .contentType(APPLICATION_JSON))
-                // THEN
+                get(URI.create("/api/v1/routes"))
+                        .contentType(APPLICATION_JSON)
+                        .param("from", firstCityName)
+                        .param("to", forthCityName))
+        // THEN
                 .andExpect(status().isUnprocessableEntity());
     }
 
