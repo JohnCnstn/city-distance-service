@@ -20,8 +20,8 @@ public class RoadServiceImpl implements RoadService {
     @Override
     @Transactional
     public Road createRoad(Road road) {
-        var from = cityService.findExistingOrElseCreate(road.getFrom());
-        var to = cityService.findExistingOrElseCreate(road.getTo());
+        var from = cityService.getOrCreate(road.getFrom());
+        var to = cityService.getOrCreate(road.getTo());
         var entity = ROAD_MAPPER.toEntity(road, from, to);
         var saved = roadRepository.save(entity);
         return ROAD_MAPPER.toModel(saved);
