@@ -18,7 +18,7 @@ public class CityServiceImpl implements CityService {
 
     @Override
     @Transactional(readOnly = true)
-    public CityEntity findExistingOrElseCreate(City city) {
+    public CityEntity getOrCreate(City city) {
         return cityRepository.findByName(city.getName()).orElse(CITY_MAPPER.toEntity(city));
     }
 

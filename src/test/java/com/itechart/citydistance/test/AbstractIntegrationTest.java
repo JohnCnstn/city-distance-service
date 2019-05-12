@@ -1,6 +1,9 @@
 package com.itechart.citydistance.test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itechart.citydistance.repository.CityRepository;
+import com.itechart.citydistance.repository.RoadRepository;
+import org.junit.After;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -32,5 +35,17 @@ public abstract class AbstractIntegrationTest {
 
     @Autowired
     protected TestRestTemplate restTemplate;
+
+    @Autowired
+    private RoadRepository roadRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
+
+    @After
+    public void clearDatabase() {
+        roadRepository.deleteAll();
+        cityRepository.deleteAll();
+    }
 
 }

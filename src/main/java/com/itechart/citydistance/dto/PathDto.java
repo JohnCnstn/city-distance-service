@@ -9,9 +9,9 @@ import java.util.List;
 
 @Data
 @QueryResult
-public class RouteDto {
+public class PathDto {
 
     private Double totalDistance;
-    private List<CityEntity> path = new ArrayList<>();
+    private List<CityEntity> cities = new ArrayList<>();
 
 }

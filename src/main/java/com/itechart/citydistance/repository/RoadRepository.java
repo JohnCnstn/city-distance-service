@@ -1,6 +1,6 @@
 package com.itechart.citydistance.repository;
 
-import com.itechart.citydistance.dto.RouteDto;
+import com.itechart.citydistance.dto.PathDto;
 import com.itechart.citydistance.entity.RoadEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,12 +12,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoadRepository extends Neo4jRepository<RoadEntity, Long> {
 
-    @Query(value = "MATCH path = (from: City {name:{from}}) -[route:ROAD_TO*]- (to: City {name:{to}})\n" +
-            "       RETURN EXTRACT(n IN nodes(path)| n) as path,\n" +
-            "              REDUCE(dist = 0, r in route | dist + r.distance) AS totalDistance\n" +
+    @Query(value = "MATCH path = (from: City) -[way:ROAD_TO*]- (to: City )\n" +
+            "           WHERE (id(from) = {from} AND id(to) = {to})" +
+            "       RETURN extract(n IN nodes(path)| n) AS cities,\n" +
+            "              reduce(dist = 0, w IN way | dist + w.distance) AS totalDistance\n" +
             "           ORDER BY totalDistance ASC\n",
-            countQuery = "MATCH path = (from: City {name:{from}}) -[route:ROAD_TO*]- (to: City {name:{to}})\n" +
-                    "             RETURN COUNT(path)\n")
-    Page<RouteDto> findRoads(@Param("from") String from, @Param("to") String to, Pageable pageable);
+            countQuery = "MATCH path = (from: City {name:{from}}) -[way:ROAD_TO*]- (to: City {name:{to}})\n" +
+                    "             RETURN count(path)\n")
+    Page<PathDto> findRoads(@Param("from") long from, @Param("to") long to, Pageable pageable);
 
 }

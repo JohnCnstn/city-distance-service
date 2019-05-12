@@ -20,27 +20,20 @@ repositories {
 dependencies {
     annotationProcessor("org.mapstruct:mapstruct-processor:${Versions.mapstruct}")
     annotationProcessor("org.projectlombok:lombok")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
     compile("org.springframework.boot:spring-boot-starter-data-neo4j:${Versions.springDataNeo4j}")
     implementation("org.springframework.boot:spring-boot-starter-web")
 
     compileOnly("org.projectlombok:lombok")
 
-    implementation("org.neo4j:neo4j-ogm-embedded-driver:${Versions.neo4jOgmEmbeddedDriver}")
     implementation("org.neo4j:neo4j-ogm-bolt-driver:${Versions.neo4jOgmBoltDriver}")
 
     implementation("io.swagger:swagger-annotations:${Versions.swaggerAnnotations}")
     implementation("org.mapstruct:mapstruct-jdk8:${Versions.mapstruct}")
 
-    implementation("org.springframework.hateoas:spring-hateoas:${Versions.springHateoas}")
-
     implementation("org.yaml:snakeyaml")
 
-    runtimeOnly("javax.xml.bind:jaxb-api")
-
     testImplementation("com.github.javafaker:javafaker:${Versions.javafaker}")
-    testImplementation("org.neo4j:neo4j-ogm-test:${Versions.neo4jOgmTest}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.testcontainers:testcontainers:${Versions.testcontainers}")
 }

@@ -5,6 +5,6 @@ import com.itechart.citydistance.generated.model.City;
 
 public interface CityService {
 
-    CityEntity findExistingOrElseCreate(City city);
+    CityEntity getOrCreate(City city);
 
 }

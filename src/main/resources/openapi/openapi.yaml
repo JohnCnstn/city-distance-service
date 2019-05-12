@@ -10,15 +10,15 @@ servers:
 paths:
 
   # ========================================
-  # ===== Routes API
+  # ===== Paths API
   # ========================================
 
-  /routes:
+  /paths:
 
     get:
-      operationId: getRoutes
+      operationId: getPaths
       tags:
-      - routes
+      - paths
       parameters:
       - $ref: "#/components/parameters/PageQueryParam"
       - $ref: "#/components/parameters/SizeQueryParam"
@@ -40,7 +40,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Route'
+                  $ref: '#/components/schemas/Path'
         default:
           $ref: '#/components/responses/UnexpectedError'
 
@@ -85,7 +85,7 @@ components:
 
   schemas:
 
-    Route:
+    Path:
       type: object
       required:
       - from
