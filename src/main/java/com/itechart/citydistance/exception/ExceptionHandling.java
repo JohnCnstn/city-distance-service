@@ -17,4 +17,10 @@ public class ExceptionHandling extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, new Error().message(ex.getMessage()), new HttpHeaders(), ex.getStatus(), request);
     }
 
+    @ExceptionHandler(EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFoundException(
+            EntityNotFoundException ex, WebRequest request) {
+        return handleExceptionInternal(ex, new Error().message(ex.getMessage()), new HttpHeaders(), ex.getStatus(), request);
+    }
+
 }

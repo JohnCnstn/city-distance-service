@@ -150,6 +150,22 @@ public class PathsApiControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
+    public void testGetPathsWhileCitiesDontExist() throws Exception {
+        // GIVEN
+        final String firstCityName = "city1";
+        final String secondCityName = "city2";
+
+        // WHEN
+        var resultActions = mockMvc.perform(
+                get(URI.create("/api/v1/paths"))
+                        .contentType(APPLICATION_JSON)
+                        .param("from", firstCityName)
+                        .param("to", secondCityName));
+        // THEN
+        resultActions.andExpect(status().isNotFound());
+    }
+
+    @Test
     public void testGetPathsBetweenNotConnectedCities() throws Exception {
         // GIVEN
         final String firstCityName = "city1";
@@ -168,13 +184,13 @@ public class PathsApiControllerTest extends AbstractIntegrationTest {
         createRoad(secondRoad);
 
         // WHEN
-        mockMvc.perform(
+        var resultActions = mockMvc.perform(
                 get(URI.create("/api/v1/paths"))
                         .contentType(APPLICATION_JSON)
                         .param("from", firstCityName)
-                        .param("to", forthCityName))
-                // THEN
-                .andExpect(status().isUnprocessableEntity());
+                        .param("to", forthCityName));
+        // THEN
+        resultActions.andExpect(status().isUnprocessableEntity());
     }
 
     private void createRoad(Road road) throws Exception {
