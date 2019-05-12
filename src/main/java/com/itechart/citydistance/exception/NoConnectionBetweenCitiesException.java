@@ -11,7 +11,7 @@ public class NoConnectionBetweenCitiesException extends RuntimeException {
     private HttpStatus status;
 
     public NoConnectionBetweenCitiesException(String first, String second) {
-        super(String.format("There is connection between city %s and %s.", first, second));
+        super(String.format("There is no connection between %s and %s.", first, second));
         this.status = UNPROCESSABLE_ENTITY;
     }
 
