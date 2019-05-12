@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 public interface RoadRepository extends Neo4jRepository<RoadEntity, Long> {
 
     @Query(value = "MATCH path = (from: City {name:{from}}) -[way:ROAD_TO*]- (to: City {name:{to}})\n" +
-            "       RETURN extract(n IN nodes(path)| n) AS path,\n" +
+            "       RETURN extract(n IN nodes(path)| n) AS cities,\n" +
             "              reduce(dist = 0, w IN way | dist + w.distance) AS totalDistance\n" +
             "           ORDER BY totalDistance ASC\n",
             countQuery = "MATCH path = (from: City {name:{from}}) -[way:ROAD_TO*]- (to: City {name:{to}})\n" +
