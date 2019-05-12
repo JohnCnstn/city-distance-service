@@ -1,8 +1,8 @@
 package com.itechart.citydistance.api;
 
-import com.itechart.citydistance.generated.api.RoutesApi;
-import com.itechart.citydistance.generated.model.Route;
-import com.itechart.citydistance.service.RouteService;
+import com.itechart.citydistance.generated.api.PathsApi;
+import com.itechart.citydistance.generated.model.Path;
+import com.itechart.citydistance.service.PathService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,19 +21,19 @@ import static com.itechart.citydistance.util.PagingUtil.toPageable;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
-public class RoutesApiController implements RoutesApi {
+public class PathsApiController implements PathsApi {
 
-    private final RouteService routeService;
+    private final PathService pathService;
 
     @Override
-    public ResponseEntity<List<Route>> getRoutes(
+    public ResponseEntity<List<Path>> getPaths(
             @NotNull @Valid String from,
             @NotNull @Valid String to,
             @Min(1) @Valid Integer page,
             @Min(1) @Max(100) @Valid Integer size) {
-        var routes = routeService.getRoutes(from, to, toPageable(page, size));
-        var headers = generatePaginationHeaders(routes);
-        return new ResponseEntity<>(routes.getContent(), headers, HttpStatus.OK);
+        var paths = pathService.getPaths(from, to, toPageable(page, size));
+        var headers = generatePaginationHeaders(paths);
+        return new ResponseEntity<>(paths.getContent(), headers, HttpStatus.OK);
     }
 
 }

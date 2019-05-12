@@ -2,7 +2,7 @@ package com.itechart.citydistance.api;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.itechart.citydistance.generated.model.Road;
-import com.itechart.citydistance.generated.model.Route;
+import com.itechart.citydistance.generated.model.Path;
 import com.itechart.citydistance.test.AbstractIntegrationTest;
 import com.itechart.citydistance.util.TestUtil;
 import org.junit.Test;
@@ -16,10 +16,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class RoutesApiControllerTest extends AbstractIntegrationTest {
+public class PathsApiControllerTest extends AbstractIntegrationTest {
 
     @Test
-    public void testGetRoutes_happyPath() throws Exception {
+    public void testGetPaths_happyPath() throws Exception {
         // GIVEN
         final String firstCityName = "city1";
         final String secondCityName = "city2";
@@ -47,13 +47,13 @@ public class RoutesApiControllerTest extends AbstractIntegrationTest {
 
         // WHEN
         var response = mockMvc.perform(
-                get(URI.create("/api/v1/routes"))
+                get(URI.create("/api/v1/paths"))
                         .contentType(APPLICATION_JSON)
                         .param("from", firstCityName)
                         .param("to", thirdCityName))
                 .andExpect(status().isOk())
                 .andReturn().getResponse();
-        List<Route> result = objectMapper.readValue(response.getContentAsByteArray(), new TypeReference<List<Route>>() {
+        List<Path> result = objectMapper.readValue(response.getContentAsByteArray(), new TypeReference<List<Path>>() {
         });
 
         // THEN
@@ -64,12 +64,12 @@ public class RoutesApiControllerTest extends AbstractIntegrationTest {
     }
 
     @Test
-    public void testGetRoutesBetweenNotConnectedCities() throws Exception {
+    public void testGetPathsBetweenNotConnectedCities() throws Exception {
         // GIVEN
-        final String firstCityName = "city1";
-        final String secondCityName = "city2";
-        final String thirdCityName = "city3";
-        final String forthCityName = "city4";
+        final String firstCityName = "a";
+        final String secondCityName = "b";
+        final String thirdCityName = "c";
+        final String forthCityName = "d";
 
         var first = TestUtil.newCity(firstCityName);
         var second = TestUtil.newCity(secondCityName);
@@ -83,11 +83,11 @@ public class RoutesApiControllerTest extends AbstractIntegrationTest {
 
         // WHEN
         mockMvc.perform(
-                get(URI.create("/api/v1/routes"))
+                get(URI.create("/api/v1/paths"))
                         .contentType(APPLICATION_JSON)
                         .param("from", firstCityName)
                         .param("to", forthCityName))
-        // THEN
+                // THEN
                 .andExpect(status().isUnprocessableEntity());
     }
 
